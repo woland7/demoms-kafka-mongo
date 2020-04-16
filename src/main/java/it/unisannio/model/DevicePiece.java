@@ -3,23 +3,23 @@ package it.unisannio.model;
 import com.google.gson.Gson;
 
 public class DevicePiece {
-    private String idPiece;
+    private int idPiece;
     private String idDevice;
 
     public DevicePiece(){
 
     }
 
-    public DevicePiece(String idPiece, String idDevice) {
+    public DevicePiece(int idPiece, String idDevice) {
         this.idPiece = idPiece;
         this.idDevice = idDevice;
     }
 
-    public String getIdPiece() {
+    public int getIdPiece() {
         return idPiece;
     }
 
-    public void setIdPiece(String idPiece) {
+    public void setIdPiece(int idPiece) {
         this.idPiece = idPiece;
     }
 
@@ -31,7 +31,7 @@ public class DevicePiece {
         this.idDevice = idDevice;
     }
 
-    public String toString(){
-        return  new Gson().toJson(this);
+    public String toString() {
+        return new Gson().toJson(this);
     }
 }

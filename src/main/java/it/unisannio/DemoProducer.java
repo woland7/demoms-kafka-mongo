@@ -1,13 +1,17 @@
 package it.unisannio;
 
+import it.unisannio.model.DevicePiece;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
 import org.apache.kafka.clients.producer.ProducerRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Properties;
 import java.util.Scanner;
 
 public class DemoProducer {
+    private static Logger log = LoggerFactory.getLogger(DemoProducer.class);
     public static void main(String[] args){
         Properties props = new Properties();
         props.put("bootstrap.servers", "localhost:9092");
@@ -17,15 +21,17 @@ public class DemoProducer {
 
         Producer<String, String> producer = new KafkaProducer<>(props);
         Scanner in = new Scanner(System.in);
-        int i = 0;
-        boolean check = true;
-        while(check){
-            String prova = in.nextLine();
-            if(prova.equals("fine")) {
-                check = false;
+        int i = 100;
+        while(true){
+            System.out.println("Enter piece ID:");
+            int idPiece = Integer.parseInt(in.nextLine());
+            System.out.println("Enter device ID:");
+            String idDevice = in.nextLine();
+            //log.info("Added new piece...");
+            DevicePiece dp = new DevicePiece(idPiece,idDevice);
+            producer.send(new ProducerRecord<>("museo", Integer.toString(i), dp.toString()));
+            if(idPiece == 0)
                 break;
-            }
-            producer.send(new ProducerRecord<>("demoms", Integer.toString(i), prova));
         }
         producer.close();
     }

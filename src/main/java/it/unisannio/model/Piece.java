@@ -1,25 +1,27 @@
 package it.unisannio.model;
 
 import com.google.gson.Gson;
+import org.bson.codecs.pojo.annotations.BsonId;
+import org.bson.codecs.pojo.annotations.BsonProperty;
 
 public class Piece {
-    private String _id;
+    private int _id;
     private long count;
 
     public Piece(){
 
     }
 
-    public Piece(String _id, long count){
+    public Piece(int _id, long count){
         this._id = _id;
         this.count = count;
     }
 
-    public String get_id() {
+    public int get_id() {
         return _id;
     }
 
-    public void set_id(String _id) {
+    public void set_id(int _id) {
         this._id = _id;
     }
 
